@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2"
         mc:Ignorable="d"
-        Title="Task1Window" Height="450" Width="800">
+        Title="Image Processing" Height="450" Width="800">
     <Grid>
-        
-    </Grid>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+			<Button Content="Convert to Grayscale" Click="OnConvertToGrayscale" Margin="5"/>
+		</StackPanel>
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+		</StackPanel>
+		<Image Name="ImageDisplay" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"/>
+	</Grid>
 </Window>
