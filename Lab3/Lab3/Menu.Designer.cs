@@ -28,34 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            button2 = new Button();
+            button1 = new Button();
+            SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(86, 117);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 62);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Рисование отрезка";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new Point(86, 117);
+            button2.Name = "button2";
+            button2.Size = new Size(107, 62);
+            button2.TabIndex = 1;
+            button2.Text = "Рисование отрезка";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(86, 198);
+            button1.Name = "button1";
+            button1.Size = new Size(107, 58);
+            button1.TabIndex = 2;
+            button1.Text = "Рисование градиентного треугольника";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 318);
-            this.Controls.Add(this.button2);
-            this.Name = "Menu";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Выбор задания";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(276, 318);
+            Controls.Add(button1);
+            Controls.Add(button2);
+            Name = "Menu";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Выбор задания";
+            ResumeLayout(false);
         }
 
         #endregion
         private Button button2;
+        private Button button1;
     }
 }
