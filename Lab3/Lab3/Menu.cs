@@ -17,7 +17,6 @@ namespace Lab3Rastr
             InitializeComponent();
         }
 
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -25,6 +24,11 @@ namespace Lab3Rastr
             SigDraw.Show();
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            GradientTriangle gradientTriangle = new GradientTriangle();
+            gradientTriangle.Show(this);
+        }
     }
 }
