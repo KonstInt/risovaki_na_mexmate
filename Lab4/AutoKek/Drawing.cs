@@ -23,7 +23,7 @@ namespace AutoKek
             }
             else
             {
-                buttonPolygon.Text = "Нарисовать что-нибудь";
+                buttonPolygon.Text = "Рисовать";
                 setFlags();
             }
             isSomethingOnScreen = !isSomethingOnScreen;
