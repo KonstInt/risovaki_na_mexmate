@@ -118,6 +118,33 @@ namespace Lab6
             });
         }
 
+        // Отражение относительно выбранной координатной плоскости
+        void reflectionAboutTheAxis(ref Shape shape, AxisType axis)
+        {
+            Matrix reflectionMatrix;
+            switch (axis)
+            {
+                case AxisType.X: // XY                 
+                    reflectionMatrix = new Matrix(4, 4).fill(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
+                    break;
+                case AxisType.Y: // XZ
+                    reflectionMatrix = new Matrix(4, 4).fill(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+                    break;
+                case AxisType.Z: // YZ                 
+                    reflectionMatrix = new Matrix(4, 4).fill(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+                    break;
+                default:
+                    throw new Exception("Зеркальные оси всё сломали :(");
+            }
+
+            // отражение фигуры
+            shape.transformPoints((ref Point p) =>
+            {
+                var res = reflectionMatrix * new Matrix(4, 1).fill(p.Xf, p.Yf, p.Zf, 1);
+                p = new Point(res[0, 0], res[1, 0], res[2, 0]);
+            });
+        }
+
         /// <summary>
         /// Повернуть фигуру на заданный угол вокруг заданной оси
         /// </summary>
@@ -182,32 +209,7 @@ namespace Lab6
               });
         }
 
-            // Отражение относительно выбранной координатной плоскости
-            void reflectionAboutTheAxis(ref Shape shape, AxisType axis)
-            {
-                Matrix reflectionMatrix;
-                switch (axis)
-                {
-                    case AxisType.X: // XY                 
-                        reflectionMatrix = new Matrix(4, 4).fill(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
-                        break;
-                    case AxisType.Y: // XZ
-                        reflectionMatrix = new Matrix(4, 4).fill(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-                        break;
-                    case AxisType.Z: // YZ                 
-                        reflectionMatrix = new Matrix(4, 4).fill(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-                        break;
-                    default:
-                        throw new Exception("Зеркальные оси всё сломали :(");
-                }
 
-                // отражение фигуры
-                shape.transformPoints((ref Point p) =>
-                {
-                    var res = reflectionMatrix * new Matrix(4, 1).fill(p.Xf, p.Yf, p.Zf, 1);
-                    p = new Point(res[0, 0], res[1, 0], res[2, 0]);
-                });
-            }
 
             // Вращение многогранника вокруг прямой проходящей через центр многогранника, параллельно выбранной координатной оси
             void rotationThroughTheCenter(ref Shape shape, AxisType axis, int angle)

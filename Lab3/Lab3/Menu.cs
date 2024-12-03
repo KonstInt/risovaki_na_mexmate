@@ -30,5 +30,14 @@ namespace Lab3Rastr
             GradientTriangle gradientTriangle = new GradientTriangle();
             gradientTriangle.Show(this);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FillandHighlight fillandHighlight = new FillandHighlight();
+            fillandHighlight.Show(this);
+        }
+
+ 
     }
 }

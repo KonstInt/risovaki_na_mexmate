@@ -6,12 +6,53 @@
         xmlns:local="clr-namespace:Lab2"
         mc:Ignorable="d"
         Title="Image Processing" Height="450" Width="800">
-    <Grid>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-			<Button Content="Convert to Grayscale" Click="OnConvertToGrayscale" Margin="5"/>
-		</StackPanel>
-		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-		</StackPanel>
-		<Image Name="ImageDisplay" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"/>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="200" />
+		</Grid.RowDefinitions>
+
+		<!-- Оригинальное изображение -->
+		<GroupBox Header="Original Image" Grid.Row="0" Grid.Column="0">
+			<Image Name="ImageDisplay" Stretch="Uniform" />
+		</GroupBox>
+
+		<!-- Полутоновое изображение 1 -->
+		<GroupBox Header="Grayscale Image 1 (Classic)" Grid.Row="0" Grid.Column="1">
+			<Image Name="GrayscaleImage1Display" Stretch="Uniform" />
+		</GroupBox>
+
+		<!-- Полутоновое изображение 2 -->
+		<GroupBox Header="Grayscale Image 2 (Alternative)" Grid.Row="1" Grid.Column="0">
+			<Image Name="GrayscaleImage2Display" Stretch="Uniform" />
+		</GroupBox>
+
+		<!-- Изображение разности -->
+		<GroupBox Header="Difference Image" Grid.Row="1" Grid.Column="1">
+			<Image Name="DifferenceImageDisplay" Stretch="Uniform" />
+		</GroupBox>
+
+		<!-- Кнопка для начала преобразования -->
+		<Button Name="ConvertButton" Grid.Row="2" Grid.ColumnSpan="2" Height="40" Margin="10"
+                Content="Convert to Grayscale and Calculate Difference"
+                Click="OnConvertToGrayscale" />
+
+		<!-- Гистограмма для изображения 1 -->
+		<GroupBox Header="Histogram 1 (Classic)" Grid.Row="3" Grid.Column="0">
+			<Image Name="Histogram1Display" Stretch="Uniform" />
+		</GroupBox>
+
+		<!-- Гистограмма для изображения 2 -->
+		<GroupBox Header="Histogram 2 (Alternative)" Grid.Row="3" Grid.Column="1">
+			<Image Name="Histogram2Display" Stretch="Uniform" />
+		</GroupBox>
+
 	</Grid>
 </Window>

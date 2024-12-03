@@ -748,7 +748,7 @@ namespace Lab6
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Алгем (на максималках)";
+            this.Text = "Алгем сука (на максималках)";
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

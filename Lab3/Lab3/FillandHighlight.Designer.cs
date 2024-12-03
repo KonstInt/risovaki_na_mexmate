@@ -46,10 +46,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 26);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(899, 1045);
+            this.pictureBox1.Size = new System.Drawing.Size(485, 491);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -58,10 +58,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(940, 973);
-            this.button2.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.button2.Location = new System.Drawing.Point(506, 456);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(334, 102);
+            this.button2.Size = new System.Drawing.Size(180, 48);
             this.button2.TabIndex = 3;
             this.button2.Text = "Отчистить";
             this.button2.UseVisualStyleBackColor = true;
@@ -69,10 +69,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(938, 233);
-            this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button4.Location = new System.Drawing.Point(505, 109);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(334, 102);
+            this.button4.Size = new System.Drawing.Size(180, 48);
             this.button4.TabIndex = 7;
             this.button4.Text = "Выбрать изображение для выделения границы";
             this.button4.UseVisualStyleBackColor = true;
@@ -82,10 +81,9 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(940, 26);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.radioButton1.Location = new System.Drawing.Point(506, 12);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(222, 36);
+            this.radioButton1.Size = new System.Drawing.Size(113, 19);
             this.radioButton1.TabIndex = 8;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Заливка цветом";
@@ -94,26 +92,25 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(940, 367);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.radioButton3.Location = new System.Drawing.Point(506, 172);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(298, 36);
+            this.radioButton3.Size = new System.Drawing.Size(149, 19);
             this.radioButton3.TabIndex = 10;
             this.radioButton3.Text = "Обводка изображения";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // FillandHighlight
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1302, 1101);
+            this.ClientSize = new System.Drawing.Size(701, 516);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FillandHighlight";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -135,4 +132,3 @@
         private RadioButton radioButton3;
     }
 }
-
