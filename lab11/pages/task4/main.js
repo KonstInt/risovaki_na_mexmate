@@ -8,6 +8,7 @@ function main() {
         return;
     }
 
+    //Вершинный шейдер
     const vertexShaderSource = `
         attribute vec2 a_position;
         attribute vec3 a_color;
@@ -15,9 +16,10 @@ function main() {
         void main() {
             gl_Position = vec4(a_position, 0, 1);
             v_color = a_color;
-        }
+        }   
     `;
 
+    //Фрагментный шейдер
     const fragmentShaderSource = `
         precision mediump float;
         varying vec3 v_color;

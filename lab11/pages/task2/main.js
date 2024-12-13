@@ -8,7 +8,7 @@ export function main() {
         return;
     }
 
-    // Вершинный шейдер с константными цветами
+    // Вершинный шейдер
     const vertexShaderSource = `
         attribute vec2 a_position;
         varying vec3 v_color;
@@ -16,22 +16,20 @@ export function main() {
         void main() {
             gl_Position = vec4(a_position, 0, 1);
 
-            // Задание константного цвета для каждой фигуры
+            // Константный цвет в зависимости от положения вершины
             if (a_position.x < 0.0) {
-                v_color = vec3(1.0, 0.0, 0.0);  // Красный цвет для левой половины
+                v_color = vec3(1.0, 0.0, 0.0);  // Красный цвет для левой части
             } else {
-                v_color = vec3(0.0, 1.0, 0.0);  // Зеленый цвет для правой половины
+                v_color = vec3(0.0, 1.0, 0.0);  // Зеленый цвет для правой части
             }
         }
     `;
 
-    // Фрагментный шейдер
+    // Фрагментный шейдер с константным закрашиванием
     const fragmentShaderSource = `
         precision mediump float;
-        varying vec3 v_color;
-
         void main() {
-            gl_FragColor = vec4(v_color, 1.0);  // Используем переданный из вершинного шейдера цвет
+            gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);  // Константный цвет: зеленый
         }
     `;
 
@@ -92,7 +90,7 @@ export function main() {
     gl.clearColor(0, 0, 0, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    // Четырехугольник (два треугольника)
+    // Рисуем фигуры с использованием константного цвета
     drawShape(gl, program, gl.TRIANGLES, [
         -0.5, -0.5,
         0.5, -0.5,
@@ -102,7 +100,6 @@ export function main() {
         0.5, 0.5
     ], [-0.7, 0]);
 
-    // Веер
     drawShape(gl, program, gl.TRIANGLE_FAN, [
         0, -0.5,        
         0.75, -0.5,     
@@ -112,8 +109,7 @@ export function main() {
         -0.75, -0.5,    
         0, -0.5        
     ], [0, 0]);
-    
-    // Пятиугольник
+
     drawShape(gl, program, gl.TRIANGLE_FAN, [
         0, 0.5,
         0.47, 0.15,
