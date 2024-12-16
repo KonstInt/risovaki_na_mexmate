@@ -83,5 +83,11 @@ namespace ComputerGraphics7
         {
             return (X + ", " + Y + ", " + Z);
         }
+
+        public PointF ToPointF()
+        {
+            return new PointF((float)X, (float)Y);
+        }
+
     }
 }

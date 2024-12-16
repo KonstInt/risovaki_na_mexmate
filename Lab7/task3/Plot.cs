@@ -96,15 +96,44 @@ namespace ComputerGraphics7
                 point.Apply(t);
         }
 
-        public void Draw(Graphics g, Transform projection, int width, int height)
+        public void Draw(Graphics g, Transform projection, int width, int height, int gridSize)
         {
-            for (int i = 0; i < lines.Count; i++)
+            // Рисуем вертикальные линии
+            for (int i = 0; i <= width / gridSize; i++)
             {
-                var c = lines[i].A.Transform(projection).NormalizedToDisplay(width, height);
-                var d = lines[i].B.Transform(projection).NormalizedToDisplay(width, height);
-                g.DrawLine(Pens.Black, (float)c.X, (float)c.Y, (float)d.X, (float)d.Y);
+                float x = i * gridSize;
+
+                // Преобразование и нормализация для отображения
+                var startPoint = new PointF(x, 0);
+                var endPoint = new PointF(x, height);
+
+                var transformedStart = startPoint.Transform(projection).NormalizedToDisplay(width, height);
+                var transformedEnd = endPoint.Transform(projection).NormalizedToDisplay(width, height);
+
+                // Рисуем вертикальную линию
+                g.DrawLine(Pens.Black, (float)transformedStart.X, (float)transformedStart.Y,
+                                  (float)transformedEnd.X, (float)transformedEnd.Y);
+            }
+
+            // Рисуем горизонтальные линии
+            for (int j = 0; j <= height / gridSize; j++)
+            {
+                float y = j * gridSize;
+
+                // Преобразование и нормализация для отображения
+                var startPoint = new PointF(0, y);
+                var endPoint = new PointF(width, y);
+
+                var transformedStart = startPoint.Transform(projection).NormalizedToDisplay(width, height);
+                var transformedEnd = endPoint.Transform(projection).NormalizedToDisplay(width, height);
+
+                // Рисуем горизонтальную линию
+                g.DrawLine(Pens.Black, (float)transformedStart.X, (float)transformedStart.Y,
+                                  (float)transformedEnd.X, (float)transformedEnd.Y);
             }
         }
+
+
 
         override public string ToString()
         {
