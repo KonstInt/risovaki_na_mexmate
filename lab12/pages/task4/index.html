@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hue Gradient Circle</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="webglCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('webglCanvas');
+        const gl = canvas.getContext('webgl');
+
+        if (!gl) {
+            alert("WebGL not supported");
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const segments = 360; // Количество сегментов окружности
+        const radius = 1.0; // Радиус окружности
+        let vertices = [];
+        let scaleX = 1.0;
+        let scaleY = 1.0;
+
+        function createGradientCircle() {
+            vertices = [];
+            // Добавляем центральную вершину (белый цвет)
+            vertices.push(0, 0, 1, 1, 1);
+
+            for (let i = 0; i <= segments; i++) {
+                const angle = (i / segments) * 2 * Math.PI;
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+                const color = hsvToRgb(i / segments, 1, 1); // Цвет по Hue
+                vertices.push(x, y, color[0], color[1], color[2]);
+            }
+        }
+
+        const vertexShaderSource = `
+            attribute vec2 a_position;
+            attribute vec3 a_color;
+            uniform mat3 u_transform;
+            varying vec3 v_color;
+            void main() {
+                vec3 transformedPosition = u_transform * vec3(a_position, 1.0);
+                gl_Position = vec4(transformedPosition.xy, 0.0, 1.0);
+                v_color = a_color;
+            }
+        `;
+
+        const fragmentShaderSource = `
+            precision mediump float;
+            varying vec3 v_color;
+            void main() {
+                gl_FragColor = vec4(v_color, 1.0);
+            }
+        `;
+
+        function compileShader(source, type) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error("Error compiling shader", gl.getShaderInfoLog(shader));
+            }
+            return shader;
+        }
+
+        const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
+        const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+        const shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+            console.error("Error linking program", gl.getProgramInfoLog(shaderProgram));
+        }
+
+        gl.useProgram(shaderProgram);
+
+        const vertexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+        const positionAttribLocation = gl.getAttribLocation(shaderProgram, 'a_position');
+        gl.vertexAttribPointer(positionAttribLocation, 2, gl.FLOAT, false, 5 * Float32Array.BYTES_PER_ELEMENT, 0);
+        gl.enableVertexAttribArray(positionAttribLocation);
+
+        const colorAttribLocation = gl.getAttribLocation(shaderProgram, 'a_color');
+        gl.vertexAttribPointer(colorAttribLocation, 3, gl.FLOAT, false, 5 * Float32Array.BYTES_PER_ELEMENT, 2 * Float32Array.BYTES_PER_ELEMENT);
+        gl.enableVertexAttribArray(colorAttribLocation);
+
+        const transformUniformLocation = gl.getUniformLocation(shaderProgram, 'u_transform');
+
+        function hsvToRgb(h, s, v) {
+            let r, g, b;
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            return [r, g, b];
+        }
+
+        function drawScene() {
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            createGradientCircle();
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+            // Применяем масштабирование
+            const transformMatrix = [
+                scaleX, 0, 0,
+                0, scaleY, 0,
+                0, 0, 1
+            ];
+            gl.uniformMatrix3fv(transformUniformLocation, false, transformMatrix);
+
+            gl.drawArrays(gl.TRIANGLE_FAN, 0, vertices.length / 5);
+        }
+
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowUp') {
+                scaleY += 0.05;
+            } else if (event.key === 'ArrowDown') {
+                scaleY = Math.max(0.1, scaleY - 0.05);
+            } else if (event.key === 'ArrowRight') {
+                scaleX += 0.05;
+            } else if (event.key === 'ArrowLeft') {
+                scaleX = Math.max(0.1, scaleX - 0.05);
+            }
+            drawScene();
+        });
+
+        drawScene();
+    </script>
+</body>
+
+</html>

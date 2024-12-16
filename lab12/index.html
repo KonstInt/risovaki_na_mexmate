@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор стиля закрашивания</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #202020;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border: 2px solid white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Выберите стиль закрашивания</h1>
+    <button onclick="location.href='/pages/task1/'">Градиентный тетраэдр, который можно двигать вдоль осей кнопками
+        клавиатуры. Он должен быть повёрнут так, чтобы было видно, что это тетраэдр.</button>
+    <button onclick="location.href='/pages/task2/'">Кубик с наложенной на него текстурой. Текстура должна быть смешана с
+        цветами, пропорция регулируется кнопками клавиатуры.</button>
+    <button onclick="location.href='/pages/task3/'">Кубик с двумя смешанными текстурами. Пропорция должна регулироваться
+        кнопками клавиатуры.</button>
+    <button onclick="location.href='/pages/task4'">Градиентный круг (окружность проходит Hue из HSV, центр белый),
+        который можно масштабировать по осям (каждую ось своей кнопкой).</button>
+</body>
+
+</html>
